@@ -1,0 +1,14 @@
+[project]
+name = "time-bucket-histogram"
+version = "0.1.0"
+description = "Aggregates time-series events into equal-length intervals and returns the count for each interval."
+requires-python = ">=3.10"
+dependencies = []
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
