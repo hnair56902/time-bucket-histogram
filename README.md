@@ -20,3 +20,10 @@ Buckets are aligned to the Unix epoch (timestamp 0), not to the first event. Thi
 The edge you will hit: timestamps must be numeric and share the same unit as `bucket_size`. If your timestamps are in milliseconds and you pass a `bucket_size` of 60 expecting one-minute buckets, you will get buckets spanning 60 milliseconds instead. There is no unit detection — the library treats both values as plain numbers.
 
 Negative timestamps (pre-epoch) are supported and use floor division, so a timestamp of `-1` with a bucket size of `60` lands in the bucket `[-60, 0)`, not `[0, 60)`.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
